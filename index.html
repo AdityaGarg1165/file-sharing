@@ -2,13 +2,19 @@
 <html>
 <head>
     <title>Socket.IO IP Display</title>
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
 </head>
 <body>
     <h1>Socket.IO Client</h1>
     <p>Your IP address is: <span id="ip-address">Loading...</span></p>
     <script>
-        const socket = io();
+        // Detect the current protocol and hostname
+        const protocol = window.location.protocol;
+        const hostname = window.location.hostname;
+        const port = window.location.port ? `:${window.location.port}` : '';
+
+        // Connect to the Socket.IO server
+        const socket = io(`${protocol}//${hostname}${port}`);
 
         socket.on('ip', (ip) => {
             // Display the IP address in the span element
