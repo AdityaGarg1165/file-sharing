@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Socket.IO Example</title>
+    <title>Socket.IO IP Display</title>
     <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
     <h1>Socket.IO Client</h1>
+    <p>Your IP address is: <span id="ip-address">Loading...</span></p>
     <script>
-        // Connect to the Socket.IO server at the specified URL and port
         const socket = io('http://localhost:3000');
 
-        // Handle connection and disconnection events
+        socket.on('ip', (ip) => {
+            // Display the IP address in the span element
+            document.getElementById('ip-address').textContent = ip;
+        });
+
         socket.on('connect', () => {
             console.log('Connected to server');
         });

@@ -14,9 +14,11 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log('A user connected');
 
-  // Get and log the user's IP address
+  // Get the user's IP address
   const ip = socket.request.headers['x-forwarded-for'] || socket.request.connection.remoteAddress;
-  console.log('User IP:', ip);
+
+  // Emit the IP address to the client
+  socket.emit('ip', ip);
 
   socket.on('disconnect', () => {
     console.log('User disconnected');
