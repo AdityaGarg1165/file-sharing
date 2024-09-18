@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Socket.IO IP Display</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+    <title>Socket.IO Example</title>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
     <h1>Socket.IO Client</h1>
-    <p>Your IP address is: <span id="ip-address">Loading...</span></p>
     <script>
-        // Use the correct URL for your Vercel deployment
-        const socket = io('https://file-sharing-seven-bay.vercel.app');
+        // Connect to the Socket.IO server at the specified URL and port
+        const socket = io();
 
-        socket.on('ip', (ip) => {
-            document.getElementById('ip-address').textContent = ip;
-        });
-
+        // Handle connection and disconnection events
         socket.on('connect', () => {
             console.log('Connected to server');
         });
